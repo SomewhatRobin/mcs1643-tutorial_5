@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour
 {
     public float Speed = 6.0f;
     public float Damage = 10.0f;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -22,8 +23,14 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log($"Hit object{collision.gameObject.transform.name}");
+        //Debug.Log($"Hit object{collision.gameObject.transform.name}");
         //Check if this is an enemy
+        Enemy hitEnemy = collision.gameObject.GetComponent<Enemy>();
+        if (hitEnemy != null) 
+        {
+            hitEnemy.TakeDamage(Damage);
+        }
+
         //If it is, notify it of my damage rating
         Destroy(gameObject);
     }
